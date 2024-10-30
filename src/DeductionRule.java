@@ -7,4 +7,6 @@ public abstract class DeductionRule implements DeductiveRuleHandler{
         this.next = rule;
     }
 
+    public DeductiveRuleHandler getNext() { return this.next; }
+
 }
