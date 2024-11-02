@@ -1,13 +1,52 @@
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class SudokuBoard {
-    private Cell[][] board;
-    private HashMap<Integer,Cell[]> allBlocks;
 
+    public static Cell[][] board = new Cell[9][9];
 
+    // A FAIRE: Traiter le cas où l'utilisateur rentre plus de 9 lignes et 9 colonnes
+    // A FAIRE: Il reste à comprendre cette ligne: e.printStackTrace();  ligne 48
 
-//    private Integer getBlock() {
-//        switch () {
-//        }
-//    }
+    public SudokuBoard(String chemin) {
+        //J'ai testé avec ce chemin
+        //String chemin = "C:\\Users\\33767\\IdeaProjects\\Pour Tester Les Connaissances\\LireFichier\\Sudokutest.txt";
+        int i = 0; // compteur de lignes
+        try {
+
+            File myFile = new File(chemin); //on stock le fichier dans myFile
+            Scanner myReader = new Scanner(myFile); // On lance la lecture
+            while (myReader.hasNextLine()) { // on avance jusqu'à ce qu'il n'y ait pls de ligne
+                String[] data = myReader.nextLine().split(","); // On stock temporairement chaque chiffre
+                                                                      // de la ligne parcourue dans un tableau de
+                                                                      // chaîne de caractères data
+
+                for (int j = 0; j < data.length; j++) {     // On va remplir le board
+                    board[i][j]= new Cell(Integer.parseInt(data[j]));   // On créé chaque Cell du tableau avec son constructeur
+                                                                        // dont le paramètre est: le chiffre de la ligne parcourue
+                                                                        // transformé en int.
+                                                                        // On affecte cette Cell directement dans la bonne case du tableau
+                }
+// Les 2 lignes en dessous sont pour vérifier qu'on a bien des Cell
+                System.out.println("RealValue de Cellule " + (i+1) + ", 1:  " + board[i][0].realValue );
+                System.out.println("PossibleValue de Cellule:" + (i+1) + ", 1:" + board[i][0].possibleValue );
+
+                i++;    // On va lire la ligne d'en dessous, compteur de ligne augmente
+            }
+
+// Les lignes suivantes sont pour vérifier l'entiereté du tableau
+
+            for (int k = 0; k < board.length; k++) {
+                for (int l = 0; l < board[k].length; l++) {
+                    System.out.print(board[k][l].realValue + ", ");
+                }
+                System.out.println();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();    // A FAIRE: Il reste à comprendre cette ligne
+        }
+    }
+
 }
