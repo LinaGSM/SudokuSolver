@@ -24,7 +24,7 @@ public class SudokuBoard {
                                                                       // chaîne de caractères data
 
                 for (int j = 0; j < data.length; j++) {     // On va remplir le board
-                    board[i][j]= new Cell(Integer.parseInt(data[j]));   // On créé chaque Cell du tableau avec son constructeur
+                    board[i][j]= new Cell(Integer.parseInt(data[j]),i,j);   // On créé chaque Cell du tableau avec son constructeur
                                                                         // dont le paramètre est: le chiffre de la ligne parcourue
                                                                         // transformé en int.
                                                                         // On affecte cette Cell directement dans la bonne case du tableau
