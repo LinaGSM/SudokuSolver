@@ -1,3 +1,3 @@
 public enum IteratorType {
-    ROW, COLUMN, BLOCK;
+    ROW, COLUMN, BLOCK, BOARD;
 }

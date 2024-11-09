@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /* Un Cellule possède:
@@ -10,7 +11,7 @@ La Cellule appartient à une ligne, à une colonne et à un bloc*/
 
 public class Cell {
     public int realValue;   //valeur actuelle
-    public List<Integer> possibleValue = List.of(1,2,3,4,5,6,7,8,9);    // liste de potentielles valeurs
+    public List<Integer> possibleValue = new ArrayList<>(List.of(1,2,3,4,5,6,7,8,9));    // liste de potentielles valeurs
     public int rowNumber;   // ligne à laquelle appartient la valeur
     public int columnNumber;    // colonne à laquelle appartient la valeur
     public int blockNumber;    // bloc auquel appartient la valeur
@@ -29,5 +30,9 @@ public class Cell {
 
     private int block(int i, int j) {   // Calcul du block à la ligne i colonne j
         return ( (i/3) * 3 + j/3 ); // Somme des divisions entières par 3 des lignes et colonnes
+    }
+
+    public boolean equals(Cell cell) {
+        return cell != null && cell.rowNumber == this.rowNumber && cell.columnNumber == this.columnNumber;
     }
 }

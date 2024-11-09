@@ -14,8 +14,9 @@ public class ColumnIterator implements CollectionIterator{
     }
 
     @Override
-    public void affihceIndex() {
+    public int affihceIndex() {
         System.out.println(this.getIndex());
+        return 0;
     }
 
     @Override

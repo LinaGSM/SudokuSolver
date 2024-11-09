@@ -34,8 +34,9 @@ public class RowIterator implements CollectionIterator{
         return prochainIndice;
     }
 
-    public void affihceIndex(){
+    public int affihceIndex(){
         System.out.println(this.getIndex());
+        return prochainIndice;
     }
 
     @Override

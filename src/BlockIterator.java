@@ -13,13 +13,13 @@ public class BlockIterator implements CollectionIterator{
         //Plus concis
         j = (blockNb%3)*3;  // On initialise toujours j à la première colonne du block
         switch (blockNb){
-            case 1,2,3:     // Les 3 premiers Blocks on commence ligne 0
+            case 0,1,2:     // Les 3 premiers Blocks on commence ligne 0
                 i = 0;
                 break;
-            case 4,5,6:     // Les 3 suivants ligne 3
+            case 3,4,5:     // Les 3 suivants ligne 3
                 i = 3;
                 break;
-            case 7,8,9:     // Et les trois derniers ligne 6
+            case 6,7,8:     // Et les trois derniers ligne 6
                 i = 6;
                 break;
             /*default:
@@ -83,8 +83,9 @@ public class BlockIterator implements CollectionIterator{
         return 0;
     }
 
-    public void affihceIndex(){     // A retirer
+    public int affihceIndex(){     // A retirer
         System.out.println(this.getIndex());
+        return 0;
     }
 
     @Override

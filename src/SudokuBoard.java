@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class SudokuBoard {
 
     public static Cell[][] board = new Cell[9][9];
+    public static BoardItrator Iterator = new BoardItrator(board);
 
     // A FAIRE: Traiter le cas où l'utilisateur rentre plus de 9 lignes et 9 colonnes
     // A FAIRE: Il reste à comprendre cette ligne: e.printStackTrace();  ligne 48
@@ -56,8 +57,8 @@ public class SudokuBoard {
                 return new RowIterator(board, index);
             case COLUMN:
                 return new ColumnIterator(board, index);
-                case BLOCK:
-                    return new BlockIterator(board, index);
+            case BLOCK:
+                return new BlockIterator(board, index);
             default:
                 throw new IllegalArgumentException("Type d'itérateur non supporté");
         }
