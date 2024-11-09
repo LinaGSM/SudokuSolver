@@ -1,4 +1,7 @@
 public abstract class DeductionRule implements DeductiveRuleHandler{
+    public boolean hasChanged=true;
+    //public boolean isFilled;
+
     private DeductiveRuleHandler next;
 
     public abstract SudokuBoard processRule(SudokuBoard board);
