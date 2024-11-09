@@ -9,6 +9,25 @@ public class BlockIterator implements CollectionIterator{
     public BlockIterator(Cell[][] grille, int blockNb) {
         this.grille = grille;
         //this.blockNb = blockNb;
+
+        //Plus concis
+        j = (blockNb%3)*3;  // On initialise toujours j à la première colonne du block
+        switch (blockNb){
+            case 1,2,3:     // Les 3 premiers Blocks on commence ligne 0
+                i = 0;
+                break;
+            case 4,5,6:     // Les 3 suivants ligne 3
+                i = 3;
+                break;
+            case 7,8,9:     // Et les trois derniers ligne 6
+                i = 6;
+                break;
+            /*default:
+                //A remplir*/
+        }
+        valInit = i;
+
+        /*
         switch (blockNb){
             case 0:
                 valInit=0;
@@ -55,6 +74,8 @@ public class BlockIterator implements CollectionIterator{
                 i = 6;
                 j = 6;
         }
+        */
+
     }
 
     @Override
