@@ -68,6 +68,44 @@ public class DR3 extends DeductionRule{
         return listOfCommonCandidates.get(0);
     }
 
+    // verifie si 3 cellules respectent la configuration XY-Wing
+    boolean isXYWingConfiguration(Cell pivot, Cell pincer1, Cell pincer2) {
+        // Vérifie que le pivot a exactement deux candidats
+        if (pivot.possibleValue.size() != 2) {
+            return false;
+        }
+
+        // Identifie les candidats de la cellule pivot
+        int X = pivot.possibleValue.get(0);
+        int Y = pivot.possibleValue.get(1);
+
+        // Vérifie que les pincettes ont exactement deux candidats
+        if (pincer1.possibleValue.size() != 2 || pincer2.possibleValue.size() != 2) {
+            return false;
+        }
+
+        // Trouve la valeur commune Z entre les pincettes
+        ArrayList<Integer> commonCandidates = new ArrayList<>(pincer1.possibleValue);
+        commonCandidates.retainAll(pincer2.possibleValue);
+
+        // Si on trouve une seule valeur commune Z
+        if (commonCandidates.size() == 1) {
+            int Z = commonCandidates.get(0);
+
+            // Vérifie que Z n'est pas dans les candidats du pivot
+            if (!pivot.possibleValue.contains(Z)) {
+                // Vérifie que pincer1 a X et Z, et pincer2 a Y et Z
+                boolean validPincer1 = pincer1.possibleValue.contains(X) && pincer1.possibleValue.contains(Z);
+                boolean validPincer2 = pincer2.possibleValue.contains(Y) && pincer2.possibleValue.contains(Z);
+
+                return validPincer1 && validPincer2;
+            }
+        }
+
+        return false;
+    }
+
+
     // recupere la liste des cellules qui sont dans l'intersection des pincettes
     ArrayList<Cell> getIntersectingCells(Cell pincer1, Cell pincer2 , SudokuBoard board){
         HashSet<Cell> listOfCellVisibleByPincer1 = new HashSet<>(getCellsAccessibleByACell(pincer1, board));
