@@ -17,6 +17,20 @@ public class DR3 extends DeductionRule{
         return listOfCellWithTwoCandidates;
     }
 
+
+    // Cherche la deuxieme celllule de la configuration XY-Wing
+    HashSet<Cell> findSecondCell(Cell cellA, SudokuBoard board) {
+        HashSet<Cell> listOfCells = new HashSet<>(getCellsAccessibleByACell(cellA, board)); // recupere la liste des cellules sur la meme ligne, colone ou block que cellA
+        HashSet<Cell> listOfCellsWithTwoCandidates = listOfCells.stream()
+                .filter(x -> x.possibleValue.size() == 2)         // filtre la liste pour obtenir les cellules avec exactement 2 candidats
+                .collect(Collectors.toCollection(HashSet::new));  // collecte le resultat dans un set/ ensemble
+        HashSet<Cell> listOfPotentialCells = listOfCellsWithTwoCandidates.stream()
+                .filter(x-> hasOneCommonCandidate(cellA, x))     //  filtre la liste pour obtenir les cellules avec exactement 2 candidats et exactement 1 candidats en commun avec la celluleA
+                .collect(Collectors.toCollection(HashSet::new));
+        return listOfPotentialCells;
+    }
+
+
     // determine si il existe exactement un candidat en commun entre 2 cellules
     boolean hasOneCommonCandidate(Cell cellA, Cell cellB){
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cellA.possibleValue);
