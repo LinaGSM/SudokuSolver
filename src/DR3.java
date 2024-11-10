@@ -100,7 +100,7 @@ public class DR3 extends DeductionRule{
         HashSet<Cell> listOfThirdCells = findSecondCell(cellA, board);
         if (listOfThirdCells.contains(cellB)) {
             listOfThirdCells.remove(cellB); // Retire la cellule B
-            // recherche les cellules qui ont exactement pour Candidat uncommonCandidate 1 et uncommonCandidate 1
+            // recherche les cellules qui ont exactement pour Candidat uncommonCandidate1 et uncommonCandidate2
             for (Cell cell : new HashSet<>(listOfThirdCells)) {
                 if (!cell.possibleValue.contains(uncommonCandidate1) && !cell.possibleValue.contains(uncommonCandidate2)) {
                     listOfThirdCells.remove(cell);
@@ -123,7 +123,7 @@ public class DR3 extends DeductionRule{
         listOfCommonCandidates.retainAll(cellB.possibleValue);
         return (listOfCommonCandidates.size() == 1);
     }
-
+    // recupere le candidat en commun entre 2 cellules
     int getTheCommonCandidate(Cell cell1, Cell cell2){
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cell1.possibleValue);
         listOfCommonCandidates.retainAll(cell2.possibleValue);
@@ -178,6 +178,7 @@ public class DR3 extends DeductionRule{
         return listOfIntersectingCell;
     }
 
+    // recupere la liste des cellules se trouvant sur la meme ligne, colonne ou bloque que la cellule spécidfiée
     public static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>();
         CollectionIterator blockIterator;
