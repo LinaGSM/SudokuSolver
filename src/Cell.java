@@ -32,7 +32,59 @@ public class Cell {
         return ( (i/3) * 3 + j/3 ); // Somme des divisions entières par 3 des lignes et colonnes
     }
 
+    public void removeFromPossibleValue(int value) {
+        if(!isValid() && (possibleValue.contains(value))) {
+            //System.out.println(possibleValue);
+            possibleValue.remove(Integer.valueOf(value));
+            //System.out.println("On a retire de la cellule "+rowNumber+":"+columnNumber+"  :   " + value);
+        }
+        verifyNoMorePossibilities();
+    }
+
+    public boolean isInSameRow(Cell cell){
+        return cell.rowNumber == this.rowNumber;
+    }
+
+    public void verifyNoMorePossibilities(){
+        if (possibleValue.size()==1) {
+            realValue = possibleValue.get(0);
+        }
+    }
+
+    public boolean isValid() {
+        return realValue != 0;
+    }
+
+    public boolean isInSameColumn(Cell cell){
+        return cell.columnNumber == this.columnNumber;
+    }
+
+    public boolean isInSameBloc(Cell cell){
+        return cell.blockNumber == this.blockNumber;
+    }
+
     public boolean equals(Cell cell) {
-        return cell != null && cell.rowNumber == this.rowNumber && cell.columnNumber == this.columnNumber;
+        return cell != null && isInSameRow(cell) && isInSameColumn(cell);
+    }
+
+
+//isItersectionOf renvoit true si la cellule est dans l'intersection entre le bloc numBloc et l'area/type (ligne ou colonne) numType
+    //  -intersection d'un bloc et d'une ligne
+    //  ou
+    //  -intersection d'un bloc et d'une colonne
+
+    public boolean isIntersectionOf(int numBloc, IteratorType type, int numType ) {
+        // Pas besoin de regarder l'intersection entre une ligne et une colonne: ce sera une unique cellule
+        boolean inSameArea;
+
+        switch (type) {
+            case ROW:
+                inSameArea = numType == this.rowNumber;
+            case COLUMN:
+                inSameArea = numType == this.columnNumber;
+            default:
+                inSameArea = false;
+        }
+        return (this.blockNumber==numBloc && inSameArea);
     }
 }

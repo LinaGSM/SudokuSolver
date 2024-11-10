@@ -3,5 +3,6 @@ public interface CollectionIterator {
     Cell next();
     int getIndex();
     int affihceIndex();
+    public void remettreLesCompteursAZero();
 }
 

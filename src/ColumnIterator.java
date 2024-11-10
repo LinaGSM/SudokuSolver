@@ -33,4 +33,8 @@ public class ColumnIterator implements CollectionIterator{
         }
         return grille[prochainIndice][colNb]; //trouver quoi renvoyer au cas où pas de next
     }
+
+    public void remettreLesCompteursAZero(){
+        prochainIndice=0;
+    }
 }
