@@ -166,4 +166,37 @@ public class DR3 extends DeductionRule{
         return modifiedBoard;
     }
 
+    // fonction pour verifier si il existe des single value dans les tests
+    // fonction pour verifier si il existe des single value dans les tests
+    void verifyBoard(SudokuBoard board){
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9; j++){
+                Cell cell = SudokuBoard.board[i][j];
+                if (cell.possibleValue.size() == 1 ) {
+                    cell.realValue = cell.possibleValue.get(0);
+                    ArrayList<Cell> list = new ArrayList<>(getCellsAccessibleByACell(cell, board));
+                    System.out.println("recupere  buddy de " + cell.realValue + " : " + cell.possibleValue);
+                    for (Cell elt : list){
+
+                        if (!(elt.equals(cell)) && elt.possibleValue.size() > 1 && elt.possibleValue.contains(cell.realValue)){
+                            elt.possibleValue.remove(Integer.valueOf(cell.realValue));
+                            for (int k = 0; k < 9; k++) {
+                                for (int l = 0; l < 9; l++) {
+                                    Cell c = SudokuBoard.board[k][l];
+                                    if (c.possibleValue.size() == 1 && c.realValue == 0) {
+                                        c.realValue = c.possibleValue.get(0);
+                                        System.out.println("Mise à jour : Cellule [" + i + "," + j + "] = " + c.realValue);
+                                        verifyBoard(board); // Vérifie et met à jour immédiatement
+                                    }
+                                }
+                            }
+
+                        }
+                        System.out.println();
+                    }
+                }
+            }
+        }
+    }
+
 }
