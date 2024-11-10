@@ -2,6 +2,77 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class DR3 extends DeductionRule{
+    public SudokuBoard processRule(SudokuBoard board) {
+        boolean hasChanged = true;
+
+        // Continue tant qu'il y a des modifications sur le board
+        while (hasChanged) {
+            hasChanged = false;
+
+            // Mise à jour de la liste des cellules avec exactement 2 candidats
+            ArrayList<Cell> listOfCellWithTwoCandidates = new ArrayList<>(findCellsWithTwoCandidates(board));
+            System.out.println("Debug 1");
+
+            // Pour chaque celluleA ayant exactement 2 candidats/possibilités
+            for (Cell cellA : listOfCellWithTwoCandidates) {
+                System.out.println("Debug 3");
+                // On récupère les candidats X et Y
+                int x = cellA.possibleValue.get(0);
+                int y = cellA.possibleValue.get(1);
+
+                // Mise à jour de la liste des cellules potentielles B
+                ArrayList<Cell> listOfPotentialCellB = new ArrayList<>(findSecondCell(cellA, board));
+
+                // Pour chaque celluleB possible ayant exactement 2 candidats et exactement 1 candidat en commun avec cellA
+                for (Cell cellB : listOfPotentialCellB) {
+                    System.out.println("Debug 4");
+                    if (hasOneCommonCandidate(cellA, cellB)) {
+                        System.out.println("Debug 5");
+
+                        // On récupère le candidat en commun et les deux candidats non communs
+                        int commonCandidate = getTheCommonCandidate(cellA, cellB);
+                        int firstUncommonCandidate = (cellA.possibleValue.get(0) == commonCandidate) ? cellB.possibleValue.get(1) : cellB.possibleValue.get(0);
+                        int secondUncommonCandidate = (cellB.possibleValue.get(0) == commonCandidate) ? cellB.possibleValue.get(1) : cellB.possibleValue.get(0);
+
+                        // Mise à jour de la liste des cellules potentielles C
+                        ArrayList<Cell> listOfPotentialCellC = new ArrayList<>(findThirdCell(cellA, cellB, board, firstUncommonCandidate, secondUncommonCandidate));
+
+                        // Pour chaque cellule ayant exactement 2 candidats qui sont les candidats non communs entre cellA et cellB
+                        for (Cell cellC : listOfPotentialCellC) {
+                            System.out.println("Debug 6");
+                            if (isXYWingConfiguration(cellA, cellB, cellC)) {
+                                System.out.println("Debug 7");
+                                int z = getTheCommonCandidate(cellB, cellC);
+
+                                // Applique les modifications et vérifie si le board a changé
+                                boolean modification = removeCandidateFromIntersectingPincers(cellB, cellC, z, board);
+                                verifyBoard(board);
+                                if (modification) {
+                                    hasChanged = true;
+                                    System.out.println("Changement détecté, redémarrage du processus XY-Wing");
+                                    break; // Quitte la boucle C pour redémarrer
+                                }
+                            }
+                        }
+
+                        // Si une modification a été détectée, on quitte la boucle B pour redémarrer
+                        if (hasChanged) {
+                            break;
+                        }
+                    }
+                }
+
+                // Si une modification a été détectée, on quitte la boucle A pour redémarrer
+                if (hasChanged) {
+                    break;
+                }
+            }
+        }
+
+        return board;
+    }
+
+
     //identification de toute les cellules ayant exactement 2 possibilités
     ArrayList<Cell> findCellsWithTwoCandidates(SudokuBoard board) {
         ArrayList<Cell> listOfCellWithTwoCandidates = new ArrayList<>();
