@@ -17,4 +17,37 @@ public class DR3 extends DeductionRule{
         return listOfCellWithTwoCandidates;
     }
 
+    public static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
+        HashSet<Cell> listOfCells = new HashSet<>();
+        CollectionIterator blockIterator;
+        CollectionIterator columnIterator;
+        CollectionIterator rowIterator;
+        rowIterator = board.createIterator(IteratorType.ROW, pincer2.rowNumber);
+        columnIterator = board.createIterator(IteratorType.COLUMN, pincer2.columnNumber);
+        blockIterator = board.createIterator(IteratorType.BLOCK, pincer2.blockNumber);
+
+        while (rowIterator.hasNext()){
+            Cell currentCell = rowIterator.next();
+            listOfCells.add(currentCell);
+        }
+
+        while (columnIterator.hasNext()){
+            Cell currentCell = columnIterator.next();
+            listOfCells.add(currentCell);
+
+        }
+
+        while (blockIterator.hasNext()){
+            Cell currentCell = blockIterator.next();
+            listOfCells.add(currentCell);
+        }
+
+        listOfCells.remove(pincer2);
+        // Debug
+//        for (Cell cell : listOfCells){
+//            System.out.println("Cellule : " + cell.rowNumber + ":" + cell.columnNumber + "value: " + cell.realValue + " -> " + cell.possibleValue);
+//        }
+        return listOfCells;
+    }
+
 }
