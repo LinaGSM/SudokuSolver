@@ -68,6 +68,16 @@ public class DR3 extends DeductionRule{
         return listOfCommonCandidates.get(0);
     }
 
+    // recupere la liste des cellules qui sont dans l'intersection des pincettes
+    ArrayList<Cell> getIntersectingCells(Cell pincer1, Cell pincer2 , SudokuBoard board){
+        HashSet<Cell> listOfCellVisibleByPincer1 = new HashSet<>(getCellsAccessibleByACell(pincer1, board));
+        HashSet<Cell> listOfCellVisibleByPincer2 = new HashSet<>(getCellsAccessibleByACell(pincer2, board));
+        ArrayList<Cell> listOfIntersectingCell = new ArrayList<>(listOfCellVisibleByPincer1);
+        listOfIntersectingCell.retainAll(listOfCellVisibleByPincer2);
+
+        return listOfIntersectingCell;
+    }
+
     public static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>();
         CollectionIterator blockIterator;
@@ -99,6 +109,23 @@ public class DR3 extends DeductionRule{
 //            System.out.println("Cellule : " + cell.rowNumber + ":" + cell.columnNumber + "value: " + cell.realValue + " -> " + cell.possibleValue);
 //        }
         return listOfCells;
+    }
+
+    // retire le Candidat z des intersections des pincers
+    boolean removeCandidateFromIntersectingPincers(Cell pincer1, Cell pincer2, int value, SudokuBoard board){
+        boolean modifiedBoard = false;
+        ArrayList<Cell> listOfIntersectingCells = new ArrayList<>(getIntersectingCells(pincer1, pincer2, board));
+        for (Cell cell : listOfIntersectingCells) {
+            if (cell.possibleValue.size() > 1 && cell.possibleValue.contains(value)) {
+                System.out.println("Retrait du candidat " + value + " de la cellule : " + cell.rowNumber + ":" + cell.columnNumber);
+                cell.possibleValue.remove(Integer.valueOf(value));
+                modifiedBoard = true;
+            }
+        }
+        for (Cell cell : listOfIntersectingCells ){
+            System.out.println("Cellule : " + cell.rowNumber + ":" + cell.columnNumber + "value:" + cell.realValue + "->" + cell.possibleValue);
+        }
+        return modifiedBoard;
     }
 
 }
