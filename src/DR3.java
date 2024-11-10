@@ -11,11 +11,9 @@ public class DR3 extends DeductionRule{
 
             // Mise à jour de la liste des cellules avec exactement 2 candidats
             ArrayList<Cell> listOfCellWithTwoCandidates = new ArrayList<>(findCellsWithTwoCandidates(board));
-            System.out.println("Debug 1");
 
             // Pour chaque celluleA ayant exactement 2 candidats/possibilités
             for (Cell cellA : listOfCellWithTwoCandidates) {
-                System.out.println("Debug 3");
                 // On récupère les candidats X et Y
                 int x = cellA.possibleValue.get(0);
                 int y = cellA.possibleValue.get(1);
@@ -25,9 +23,7 @@ public class DR3 extends DeductionRule{
 
                 // Pour chaque celluleB possible ayant exactement 2 candidats et exactement 1 candidat en commun avec cellA
                 for (Cell cellB : listOfPotentialCellB) {
-                    System.out.println("Debug 4");
                     if (hasOneCommonCandidate(cellA, cellB)) {
-                        System.out.println("Debug 5");
 
                         // On récupère le candidat en commun et les deux candidats non communs
                         int commonCandidate = getTheCommonCandidate(cellA, cellB);
@@ -39,9 +35,7 @@ public class DR3 extends DeductionRule{
 
                         // Pour chaque cellule ayant exactement 2 candidats qui sont les candidats non communs entre cellA et cellB
                         for (Cell cellC : listOfPotentialCellC) {
-                            System.out.println("Debug 6");
                             if (isXYWingConfiguration(cellA, cellB, cellC)) {
-                                System.out.println("Debug 7");
                                 int z = getTheCommonCandidate(cellB, cellC);
 
                                 // Applique les modifications et vérifie si le board a changé
@@ -49,7 +43,6 @@ public class DR3 extends DeductionRule{
                                 verifyBoard(board);
                                 if (modification) {
                                     hasChanged = true;
-                                    System.out.println("Changement détecté, redémarrage du processus XY-Wing");
                                     break; // Quitte la boucle C pour redémarrer
                                 }
                             }
@@ -107,7 +100,7 @@ public class DR3 extends DeductionRule{
         HashSet<Cell> listOfThirdCells = findSecondCell(cellA, board);
         if (listOfThirdCells.contains(cellB)) {
             listOfThirdCells.remove(cellB); // Retire la cellule B
-            // recherche les cellules qui ont exactement pour Candidat uncommonCandidate 1 et uncommonCandidate 1
+            // recherche les cellules qui ont exactement pour Candidat uncommonCandidate1 et uncommonCandidate2
             for (Cell cell : new HashSet<>(listOfThirdCells)) {
                 if (!cell.possibleValue.contains(uncommonCandidate1) && !cell.possibleValue.contains(uncommonCandidate2)) {
                     listOfThirdCells.remove(cell);
@@ -117,9 +110,7 @@ public class DR3 extends DeductionRule{
 
 
         } else {
-            System.out.println("Debug function \"findThirdCell\", line 62:");
-            System.out.println("\tCellB n'appartient pas à la liste des deuxieme cellules");
-            return new HashSet<>(); // Retourne un ensemble vide au lieu de null
+            return new HashSet<>(); // Retourne un ensemble vide
         }
 
 
@@ -132,7 +123,7 @@ public class DR3 extends DeductionRule{
         listOfCommonCandidates.retainAll(cellB.possibleValue);
         return (listOfCommonCandidates.size() == 1);
     }
-
+    // recupere le candidat en commun entre 2 cellules
     int getTheCommonCandidate(Cell cell1, Cell cell2){
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cell1.possibleValue);
         listOfCommonCandidates.retainAll(cell2.possibleValue);
@@ -187,6 +178,7 @@ public class DR3 extends DeductionRule{
         return listOfIntersectingCell;
     }
 
+    // recupere la liste des cellules se trouvant sur la meme ligne, colonne ou bloque que la cellule spécidfiée
     public static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>();
         CollectionIterator blockIterator;
@@ -211,12 +203,7 @@ public class DR3 extends DeductionRule{
             Cell currentCell = blockIterator.next();
             listOfCells.add(currentCell);
         }
-
         listOfCells.remove(pincer2);
-        // Debug
-//        for (Cell cell : listOfCells){
-//            System.out.println("Cellule : " + cell.rowNumber + ":" + cell.columnNumber + "value: " + cell.realValue + " -> " + cell.possibleValue);
-//        }
         return listOfCells;
     }
 
@@ -226,18 +213,13 @@ public class DR3 extends DeductionRule{
         ArrayList<Cell> listOfIntersectingCells = new ArrayList<>(getIntersectingCells(pincer1, pincer2, board));
         for (Cell cell : listOfIntersectingCells) {
             if (cell.possibleValue.size() > 1 && cell.possibleValue.contains(value)) {
-                System.out.println("Retrait du candidat " + value + " de la cellule : " + cell.rowNumber + ":" + cell.columnNumber);
                 cell.possibleValue.remove(Integer.valueOf(value));
                 modifiedBoard = true;
             }
         }
-        for (Cell cell : listOfIntersectingCells ){
-            System.out.println("Cellule : " + cell.rowNumber + ":" + cell.columnNumber + "value:" + cell.realValue + "->" + cell.possibleValue);
-        }
         return modifiedBoard;
     }
 
-    // fonction pour verifier si il existe des single value dans les tests
     // fonction pour verifier si il existe des single value dans les tests
     void verifyBoard(SudokuBoard board){
         for (int i = 0; i < 9; i++){
@@ -246,7 +228,6 @@ public class DR3 extends DeductionRule{
                 if (cell.possibleValue.size() == 1 ) {
                     cell.realValue = cell.possibleValue.get(0);
                     ArrayList<Cell> list = new ArrayList<>(getCellsAccessibleByACell(cell, board));
-                    System.out.println("recupere  buddy de " + cell.realValue + " : " + cell.possibleValue);
                     for (Cell elt : list){
 
                         if (!(elt.equals(cell)) && elt.possibleValue.size() > 1 && elt.possibleValue.contains(cell.realValue)){
@@ -256,14 +237,12 @@ public class DR3 extends DeductionRule{
                                     Cell c = SudokuBoard.board[k][l];
                                     if (c.possibleValue.size() == 1 && c.realValue == 0) {
                                         c.realValue = c.possibleValue.get(0);
-                                        System.out.println("Mise à jour : Cellule [" + i + "," + j + "] = " + c.realValue);
                                         verifyBoard(board); // Vérifie et met à jour immédiatement
                                     }
                                 }
                             }
 
                         }
-                        System.out.println();
                     }
                 }
             }
