@@ -6,6 +6,7 @@ public class SudokuBoard {
 
     public static Cell[][] board = new Cell[9][9];
     public static BoardItrator iterator = new BoardItrator(board);
+    private Difficulty difficulty;
 
     // A FAIRE: Traiter le cas où l'utilisateur rentre plus de 9 lignes et 9 colonnes
     // A FAIRE: Il reste à comprendre cette ligne: e.printStackTrace();  ligne 48
