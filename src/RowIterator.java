@@ -53,4 +53,8 @@ public class RowIterator implements CollectionIterator{
         }
         return grille[rowNb][prochainIndice]; //trouver quoi retourner comme Cell
     }
+
+    public void remettreLesCompteursAZero(){
+        prochainIndice=0;
+    }
 }

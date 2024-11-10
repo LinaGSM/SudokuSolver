@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class SudokuBoard {
 
     public static Cell[][] board = new Cell[9][9];
-    public static BoardItrator Iterator = new BoardItrator(board);
+    public static BoardItrator iterator = new BoardItrator(board);
 
     // A FAIRE: Traiter le cas où l'utilisateur rentre plus de 9 lignes et 9 colonnes
     // A FAIRE: Il reste à comprendre cette ligne: e.printStackTrace();  ligne 48
@@ -54,7 +54,10 @@ public class SudokuBoard {
     public CollectionIterator createIterator(IteratorType type, int index) {
         switch (type) {
             case ROW:
+                //System.out.println("Je suis passe par la");
                 return new RowIterator(board, index);
+
+
             case COLUMN:
                 return new ColumnIterator(board, index);
             case BLOCK:

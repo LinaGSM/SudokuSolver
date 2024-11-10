@@ -3,18 +3,18 @@ public class DR1 extends DeductionRule{
     public boolean removed = false;
     @Override
     public SudokuBoard processRule(SudokuBoard board) {
+        board.iterator.remettreLesCompteursAZero();
+
         int i=0;
         System.out.println("Sudoku Initial :");
         board.show();
         while(/*!isFilled &&*/ hasChanged) {
             System.out.println("\nPassage: "+i++);
             hasChanged = false;
-            board.Iterator.remettreLesCompteursAZero();
+            board.iterator.remettreLesCompteursAZero();
             /*isFilled = true;*/
-            //System.out.println("Je suis passé par là");
-            while (board.Iterator.hasNext()) {
-                Cell cell = board.Iterator.next();
-                //System.out.println("Je suis passé par là");
+            while (board.iterator.hasNext()) {
+                Cell cell = board.iterator.next();
                 if (emptyCell(cell)) {
                     /*isFilled = false;*/
                     //On retire des valeurs possibles de la cellule toutes les valeurs de la ligne
@@ -61,7 +61,7 @@ public class DR1 extends DeductionRule{
 
                 }
             }
-            board.show();
+            //board.show();
         }
         return board;
     }
