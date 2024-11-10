@@ -31,6 +31,30 @@ public class DR3 extends DeductionRule{
     }
 
 
+    // Cherche la troixieme cellule de la configuration XY-Wing
+    HashSet<Cell> findThirdCell(Cell cellA, Cell cellB, SudokuBoard board, int uncommonCandidate1, int uncommonCandidate2) {
+        HashSet<Cell> listOfThirdCells = findSecondCell(cellA, board);
+        if (listOfThirdCells.contains(cellB)) {
+            listOfThirdCells.remove(cellB); // Retire la cellule B
+            // recherche les cellules qui ont exactement pour Candidat uncommonCandidate 1 et uncommonCandidate 1
+            for (Cell cell : new HashSet<>(listOfThirdCells)) {
+                if (!cell.possibleValue.contains(uncommonCandidate1) && !cell.possibleValue.contains(uncommonCandidate2)) {
+                    listOfThirdCells.remove(cell);
+                }
+            }
+            return listOfThirdCells;
+
+
+        } else {
+            System.out.println("Debug function \"findThirdCell\", line 62:");
+            System.out.println("\tCellB n'appartient pas à la liste des deuxieme cellules");
+            return new HashSet<>(); // Retourne un ensemble vide au lieu de null
+        }
+
+
+    }
+
+
     // determine si il existe exactement un candidat en commun entre 2 cellules
     boolean hasOneCommonCandidate(Cell cellA, Cell cellB){
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cellA.possibleValue);
