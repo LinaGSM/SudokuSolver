@@ -17,6 +17,19 @@ public class DR3 extends DeductionRule{
         return listOfCellWithTwoCandidates;
     }
 
+    // determine si il existe exactement un candidat en commun entre 2 cellules
+    boolean hasOneCommonCandidate(Cell cellA, Cell cellB){
+        ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cellA.possibleValue);
+        listOfCommonCandidates.retainAll(cellB.possibleValue);
+        return (listOfCommonCandidates.size() == 1);
+    }
+
+    int getTheCommonCandidate(Cell cell1, Cell cell2){
+        ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cell1.possibleValue);
+        listOfCommonCandidates.retainAll(cell2.possibleValue);
+        return listOfCommonCandidates.get(0);
+    }
+
     public static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>();
         CollectionIterator blockIterator;
