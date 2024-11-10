@@ -50,14 +50,19 @@ public class SudokuBoard {
             e.printStackTrace();    // A FAIRE: Il reste à comprendre cette ligne
         }
     }
+    // getters et setters
+    public Difficulty getDifficulty(){
+        return this.difficulty;
+    }
+
+    public void setDifficulty(Difficulty d){
+        this.difficulty = d;
+    }
 
     public CollectionIterator createIterator(IteratorType type, int index) {
         switch (type) {
             case ROW:
-                //System.out.println("Je suis passe par la");
                 return new RowIterator(board, index);
-
-
             case COLUMN:
                 return new ColumnIterator(board, index);
             case BLOCK:
