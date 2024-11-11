@@ -3,20 +3,10 @@ public class BoardItrator implements CollectionIterator {
     private int prochainIndice = 0; // On commence à la première case de la ligne
     private int row = 0;    // On commence à la première ligne
 
+    // Crée le Tableau Sudoku Itérable
     public BoardItrator(Cell[][] grille) {
         this.grille = grille;
     }
-
-    public void remettreLesCompteursAZero() {
-        prochainIndice = 0;
-        row = 0;
-    }
-
-    @Override
-    public int getIndex() {
-        return prochainIndice;
-    }
-
 
     @Override
     public boolean hasNext() {
@@ -36,4 +26,16 @@ public class BoardItrator implements CollectionIterator {
         }
         return grille[row - 1][prochainIndice]; //trouver quoi renvoyer au cas où pas de next
     }
+
+    @Override
+    public void remettreLesCompteursAZero() {
+        prochainIndice = 0;
+        row = 0;
+    }
+
+    @Override
+    public int getIndex() {
+        return prochainIndice;
+    }
+
 }

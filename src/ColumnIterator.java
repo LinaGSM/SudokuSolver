@@ -3,14 +3,10 @@ public class ColumnIterator implements CollectionIterator {
     private int colNb;  // le numéro de la ligne
     private int prochainIndice = 0;
 
+    //Crée la colonne iterable numéro "colNb" de la grille
     public ColumnIterator(Cell[][] grille, int colNb) {
         this.grille = grille;
         this.colNb = colNb;
-    }
-
-    @Override
-    public int getIndex() {
-        return prochainIndice;
     }
 
     @Override
@@ -23,10 +19,17 @@ public class ColumnIterator implements CollectionIterator {
         if (hasNext()) {
             return grille[prochainIndice++][colNb];
         }
-        return grille[prochainIndice][colNb]; //trouver quoi renvoyer au cas où pas de next
+        return grille[prochainIndice][colNb];
     }
 
+    @Override
     public void remettreLesCompteursAZero() {
         prochainIndice = 0;
     }
+
+    @Override
+    public int getIndex() {
+        return prochainIndice;
+    }
+
 }

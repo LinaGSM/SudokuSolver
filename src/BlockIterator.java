@@ -1,20 +1,15 @@
 public class BlockIterator implements CollectionIterator {
     private Cell[][] grille;
     private int blockNb;  // le numéro de la ligne
-    public int valInit;
-    public int i;
-    public int j;
+    private int valInit;
+    private int i;
+    private int j;
 
-
+    //Crée le bloc iterable numéro "blockNb" de la grille
     public BlockIterator(Cell[][] grille, int blockNb) {
         this.grille = grille;
         this.blockNb = blockNb;
         remettreLesCompteursAZero();
-    }
-
-    @Override
-    public int getIndex() {  // A retirer
-        return 0;
     }
 
     @Override
@@ -34,9 +29,10 @@ public class BlockIterator implements CollectionIterator {
                 return grille[i][j++];
             }
         }
-        return grille[i][j]; //trouver quoi retourner comme Cell;
+        return grille[i][j];
     }
 
+    @Override
     public void remettreLesCompteursAZero() {
         j = (this.blockNb % 3) * 3;  // On initialise toujours j à la première colonne du block
         switch (this.blockNb) {
@@ -55,4 +51,10 @@ public class BlockIterator implements CollectionIterator {
         valInit = i;
 
     }
+
+    @Override
+    public int getIndex() {  // A retirer
+        return 0;
+    }
+
 }
