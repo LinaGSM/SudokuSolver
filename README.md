@@ -5,11 +5,9 @@
 2. [Fonctionnalités](#fonctionnalités)
 3. [Project Structure](#project-structure)
 4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Format du fichier d'entrée](#format-du-fichier-dentrée)
-7. [Exemple](#exemple)
-8. [Évaluation et niveaux de difficulté](#évaluation-et-niveaux-de-difficulté)
-9. [Autrices](#autrices)
+5. [Format du fichier d'entrée](#format-du-fichier-dentrée)
+6. [Compilation](#compilation)
+7. [Autrices](#autrices)
 
 ## Introduction
 
@@ -88,7 +86,7 @@ Le fichier d'entrée est un fichier texte nommé "test" situé dans le répertoi
 - Les valeurs sont séparées par des virgules, sans espaces.
 - 0 représente une cellule vide.
 
-**Exemple e contenu pour le fichier test** :
+**Exemple de contenu pour le fichier test** :
 ```
 3,8,0,1,0,0,5,9,0
 0,0,5,0,9,0,0,0,1
