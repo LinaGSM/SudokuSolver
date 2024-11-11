@@ -9,75 +9,7 @@ public class BlockIterator implements CollectionIterator{
     public BlockIterator(Cell[][] grille, int blockNb) {
         this.grille = grille;
         this.blockNb = blockNb;
-
         remettreLesCompteursAZero();
-/*
-        //Plus concis
-        j = (blockNb%3)*3;  // On initialise toujours j à la première colonne du block
-        switch (blockNb){
-            case 0,1,2:     // Les 3 premiers Blocks on commence ligne 0
-                i = 0;
-                break;
-            case 3,4,5:     // Les 3 suivants ligne 3
-                i = 3;
-                break;
-            case 6,7,8:     // Et les trois derniers ligne 6
-                i = 6;
-                break;
-            /*default:
-                //A remplir
-        }
-        valInit = i;
-*/
-        /*
-        switch (blockNb){
-            case 0:
-                valInit=0;
-                i = 0;
-                j = 0;
-                break;
-            case 1:
-                valInit=0;
-                i = 0;
-                j = 3;
-                break;
-            case 2:
-                valInit=0;
-                i = 0;
-                j = 6;
-                break;
-            case 3:
-                valInit=3;
-                i = 3;
-                j = 0;
-                break;
-            case 4:
-                valInit=3;
-                i = 3;
-                j = 3;
-                break;
-            case 5:
-                valInit=3;
-                i = 3;
-                j = 6;
-                break;
-            case 6:
-                valInit=6;
-                i = 6;
-                j = 0;
-                break;
-            case 7:
-                valInit=6;
-                i = 6;
-                j = 3;
-                break;
-            case 8:
-                valInit=6;
-                i = 6;
-                j = 6;
-        }
-        */
-
     }
 
     @Override
@@ -85,7 +17,7 @@ public class BlockIterator implements CollectionIterator{
         return 0;
     }
 
-    public int affihceIndex(){     // A retirer
+    public int affihceIndex(){
         System.out.println(this.getIndex());
         return 0;
     }
@@ -93,8 +25,6 @@ public class BlockIterator implements CollectionIterator{
     @Override
     public boolean hasNext() {
         return (i < valInit+3);
-
-        //return ((j%3!=2)||(i%3!=2));
     }
 
     @Override
@@ -127,7 +57,6 @@ public class BlockIterator implements CollectionIterator{
                 break;
             default:
                 break;
-                //A remplir
         }
         valInit = i;
 
