@@ -100,9 +100,6 @@ public class DR2 extends DeductionRule{
             }
         }
         //Parcourt de Ligne - Intersection avec Bloc
-        System.out.println("On retire du bloc: "+possibleValueARetirerDuBloc);
-        System.out.println("On retire de la ligne: "+possibleValueARetirerDeLaLigne);
-
         removeTravesingColumn(block,cell,possibleValueARetirerDuBloc);
         removeTravesingColumn(ligne,cell,possibleValueARetirerDeLaLigne);
 
@@ -161,10 +158,6 @@ public class DR2 extends DeductionRule{
 
         }
         //Parcourt de Ligne - Intersection avec Bloc
-
-        System.out.println("On retire de la ligne: " + possibleValueARetirerDeLaLigne);
-        System.out.println("On retire de la colonne: " + possibleValueARetirerDeLaColonne);
-
         // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées (intersection entre Block et Ligne (ou Colonne))
         removeTravesingBlock(ligne,cell,possibleValueARetirerDeLaLigne);
         removeTravesingBlock(colonne,cell,possibleValueARetirerDeLaColonne);
