@@ -12,11 +12,6 @@ public class DR2 extends DeductionRule{
             parcourtBlocDR2(cell,board);
             parcourtColonneDR2(cell,board);
         }
-
-        //parcourtLigneDR2(board.board[0][3],board);
-        //System.out.println("Case "+board.board[1][4].rowNumber+":"+board.board[1][4].columnNumber+" Possibilities: "+board.board[1][4].possibleValue);
-        //parcourtBlocDR2(board.board[3][2],board);
-        //parcourtColonneDR2(board.board[6][0],board);
         return null;
     }
 
@@ -38,7 +33,6 @@ public class DR2 extends DeductionRule{
             ligne.remettreLesCompteursAZero();
             while (ligne.hasNext()){
                 Cell cellLigne= ligne.next();
-                //System.out.println("Case "+cellLigne.rowNumber+":"+cellLigne.columnNumber+" Possibilities: "+cellLigne.possibleValue);
                 if(cellLigne.equals(cell)){
                     continue; //On Saute cette valeur car elle ne nous intéresse pas
                 };
@@ -59,10 +53,6 @@ public class DR2 extends DeductionRule{
                 }
             }
         }
-        //Parcourt de Ligne - Intersection avec Bloc
-        //System.out.println("On retire du bloc: "+possibleValueARetirerDuBloc);
-        //System.out.println("On retire de la colonne: "+possibleValueARetirerDeLaColonne);
-
         // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées (intersection entre Block et Ligne (ou Colonne))
         removeTravesingRow(block,cell,possibleValueARetirerDuBloc);
         removeTravesingRow(colonne,cell,possibleValueARetirerDeLaColonne);
@@ -89,7 +79,6 @@ public class DR2 extends DeductionRule{
             colonne.remettreLesCompteursAZero();
             while (colonne.hasNext()){
                 Cell cellColonne = colonne.next();
-                //System.out.println("Case "+cellLigne.rowNumber+":"+cellLigne.columnNumber+" Possibilities: "+cellLigne.possibleValue);
                 if(cellColonne.equals(cell)){
                     continue; //On Saute cette valeur car elle ne nous intéresse pas
                 };
@@ -140,8 +129,6 @@ public class DR2 extends DeductionRule{
             block.remettreLesCompteursAZero();
             while (block.hasNext()){
                 Cell cellBlock = block.next();
-// Utils
-                //System.out.println("Case "+cellLigne.rowNumber+":"+cellLigne.columnNumber+" Possibilities: "+cellLigne.possibleValue);
                 if(cellBlock.equals(cell)){
                     continue; //On Saute cette valeur car elle ne nous intéresse pas
                 };
@@ -192,8 +179,6 @@ public class DR2 extends DeductionRule{
                 continue;
             }
             removeListFromCell(liste, cellArea);
-            //System.out.println("Case: "+ cellArea.rowNumber+":"+cellArea.columnNumber+"     Possibities: "+ cellArea.possibleValue);
-
         }
     }
 
@@ -205,7 +190,6 @@ public class DR2 extends DeductionRule{
                 continue;
             }
             removeListFromCell(liste, cellArea);
-            //System.out.println("Case: "+ cellArea.rowNumber+":"+cellArea.columnNumber+"     Possibities: "+ cellArea.possibleValue);
 
         }
     }
@@ -218,7 +202,6 @@ public class DR2 extends DeductionRule{
                 continue;
             }
             removeListFromCell(liste, cellArea);
-            //System.out.println("Case: "+ cellArea.rowNumber+":"+cellArea.columnNumber+"     Possibities: "+ cellArea.possibleValue);
 
         }
     }
