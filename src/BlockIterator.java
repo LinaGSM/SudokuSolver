@@ -17,11 +17,6 @@ public class BlockIterator implements CollectionIterator{
         return 0;
     }
 
-    public int affihceIndex(){
-        System.out.println(this.getIndex());
-        return 0;
-    }
-
     @Override
     public boolean hasNext() {
         return (i < valInit+3);

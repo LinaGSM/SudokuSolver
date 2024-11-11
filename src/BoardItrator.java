@@ -17,10 +17,6 @@ public class BoardItrator implements CollectionIterator{
         return prochainIndice;
     }
 
-    @Override
-    public int affihceIndex() {
-        return prochainIndice;
-    }
 
     @Override
     public boolean hasNext() {

@@ -14,12 +14,6 @@ public class ColumnIterator implements CollectionIterator{
     }
 
     @Override
-    public int affihceIndex() {
-        System.out.println(this.getIndex());
-        return 0;
-    }
-
-    @Override
     public boolean hasNext() {
         return prochainIndice < grille.length;
     }
