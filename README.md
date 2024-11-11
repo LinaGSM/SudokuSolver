@@ -54,6 +54,8 @@ src/
 ├── SudokuBoard.java
 ├── test (fichier texte contenant le Sudoku initial)
 └── UserInputHandler.java
+```
+
 
 
 Chaque fichier Java a une fonction spécifique dans le projet :
@@ -76,6 +78,7 @@ Chaque fichier Java a une fonction spécifique dans le projet :
 To clone the project from GitHub, use the following command:
 ```bash
 git clone [repository-url]
+```
 
 ## Format du fichier d'entrée
 Le fichier d'entrée est un fichier texte nommé "test" situé dans le répertoire "src". Vous pouvez y écrire la grille de Sudoku à résoudre selon le format suivant :
@@ -100,15 +103,19 @@ Pour compiler le projet, suivez ces étapes dans un terminal :
 1. Ouvrir le répertoire `src` :
    ```bash
    cd src
+   ```
 2. Supprimer les fichiers .class existants :
    ```bash
    rm *.class
+   ```
 3. Compiler le programme
    ```bash
    javac Main.java
+   ```
 4. Exécuter le programme
    ```bash
    java Main "chemin_absolu/vers/le/fichier/test"
+   ```
 **Exemple** : java Main C:/Users/magiq/Documents/SudokuSolver/src/test
 
 ## Autrices
