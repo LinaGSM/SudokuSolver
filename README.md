@@ -71,7 +71,7 @@ Chaque fichier Java a une fonction spécifique dans le projet :
 
 ### Prerequis
 - **Java** (JDK 8 ou supérieur) doit être installé sur votre système.
-- Git
+- **Git**
 - Un terminal ou un IDE comme IntelliJ IDEA pour exécuter le programme.
 - Un fichier d'entrée contenant une grille de Sudoku dans le format spécifié (voir section "Format du fichier d'entrée").
 
