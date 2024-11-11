@@ -8,13 +8,7 @@ public class SudokuBoard {
     public static BoardItrator iterator = new BoardItrator(board);
     private Difficulty difficulty;
 
-    // A FAIRE: Traiter le cas où l'utilisateur rentre plus de 9 lignes et 9 colonnes
-    // A FAIRE: Il reste à comprendre cette ligne: e.printStackTrace();  ligne 48
-    //  A FAIRE: Modifier l'affichage pour le rendre esthétique
-
     public SudokuBoard(String chemin) {
-        //J'ai testé avec ce chemin
-        //String chemin = "C:\\Users\\33767\\IdeaProjects\\Pour Tester Les Connaissances\\LireFichier\\Sudokutest.txt";
         int i = 0; // compteur de lignes
         try {
 
@@ -32,21 +26,11 @@ public class SudokuBoard {
                                                                         // On affecte cette Cell directement dans la bonne case du tableau
                 }
 // Les 2 lignes en dessous sont pour vérifier qu'on a bien des Cell
-                /*System.out.println("RealValue de Cellule " + (i+1) + ", 1:  " + board[i][0].realValue );
-                System.out.println("PossibleValue de Cellule:" + (i+1) + ", 1:" + board[i][0].possibleValue );*/
-
                 i++;    // On va lire la ligne d'en dessous, compteur de ligne augmente
             }
 
 // Les lignes suivantes sont pour vérifier l'entiereté du tableau
-/*
-            for (int k = 0; k < board.length; k++) {
-                for (int l = 0; l < board[k].length; l++) {
-                    System.out.print(board[k][l].realValue + ", ");
-                }
-                System.out.println();
-            }
-*/
+
         } catch (IOException e) {
             e.printStackTrace();    // A FAIRE: Il reste à comprendre cette ligne
         }
