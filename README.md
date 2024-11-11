@@ -3,7 +3,7 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Fonctionnalités](#fonctionnalités)
-3. [Project Structure](#project-structure)
+3. [Structure du Projet](#structure-du-projet)
 4. [Installation](#installation)
 5. [Format du fichier d'entrée](#format-du-fichier-dentrée)
 6. [Compilation](#compilation)
@@ -28,7 +28,7 @@ L'algorithme de déduction utilisé fonctionne comme suit :
   - **Moyen** : Résolu avec **DR2** après **DR1**.
   - **Difficile** : Résolu avec **DR3** après **DR2**.
 
-## Project Structure
+## Structure du Projet
 
 Le code principal du projet se trouve dans le répertoire src. La structure est la suivante :
 
