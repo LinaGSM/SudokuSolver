@@ -77,7 +77,7 @@ Chaque fichier Java a une fonction spécifique dans le projet :
 ### Cloner le dépôt
 Pour cloner le projet depuis GitHub, utilisez la commande suivante :
 ```bash
-git clone "https://github.com/LinaGSM/SudokuSolver"
+git clone https://github.com/LinaGSM/SudokuSolver
 ```
 
 ## Format du fichier d'entrée
