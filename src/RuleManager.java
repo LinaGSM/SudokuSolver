@@ -35,16 +35,19 @@ public class RuleManager {
                     System.out.println("Application de DR1 ...");
                     currentRule.processRule(board);
                     board.setDifficulty(Difficulty.EASY);
+                    board.show();
                 } else if (currentRule instanceof DR2) {
                     System.out.println("Application de DR2 ...");
                     currentRule.processRule(board);
                     board.setDifficulty(Difficulty.MEDIUM);
+                    board.show();
 
                 } else if (currentRule instanceof DR3) {
                     System.out.println("Application de DR3 ...");
                     currentRule.processRule(board);
                     dr3WasApplied = true;
                     board.setDifficulty(Difficulty.HARD);
+                    board.show();
                 }
 
                 currentRule = currentRule.getNext();
@@ -70,6 +73,7 @@ public class RuleManager {
     // verifie si le sudoku est remplie
     boolean isFilled(SudokuBoard board){
         boolean isFilled = true;
+        board.iterator.remettreLesCompteursAZero();
         while (board.iterator.hasNext()){
             Cell cell = board.iterator.next();
             if (cell.realValue == 0){
