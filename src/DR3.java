@@ -180,14 +180,14 @@ public class DR3 extends DeductionRule {
     }
 
     // recupere la liste des cellules se trouvant sur la meme ligne, colonne ou bloque que la cellule spécidfiée
-    private static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
+    private static HashSet<Cell> getCellsAccessibleByACell(Cell cell, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>();
         CollectionIterator blockIterator;
         CollectionIterator columnIterator;
         CollectionIterator rowIterator;
-        rowIterator = board.createIterator(IteratorType.ROW, pincer2.rowNumber);
-        columnIterator = board.createIterator(IteratorType.COLUMN, pincer2.columnNumber);
-        blockIterator = board.createIterator(IteratorType.BLOCK, pincer2.blockNumber);
+        rowIterator = board.createIterator(IteratorType.ROW, cell.rowNumber);
+        columnIterator = board.createIterator(IteratorType.COLUMN, cell.columnNumber);
+        blockIterator = board.createIterator(IteratorType.BLOCK, cell.blockNumber);
 
         while (rowIterator.hasNext()) {
             Cell currentCell = rowIterator.next();
@@ -204,7 +204,7 @@ public class DR3 extends DeductionRule {
             Cell currentCell = blockIterator.next();
             listOfCells.add(currentCell);
         }
-        listOfCells.remove(pincer2);
+        listOfCells.remove(cell);
         return listOfCells;
     }
 
