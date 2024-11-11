@@ -15,6 +15,7 @@ public class DR2 extends DeductionRule {
         return null;
     }
 
+    // Applique la Rule Locked Candidate en vérifiant la présence des possibilités de cell dans sa ligne
     public void parcourtLigneDR2(Cell cell, SudokuBoard board) {
         CollectionIterator ligne = board.createIterator(IteratorType.ROW, cell.rowNumber);
         CollectionIterator colonne = board.createIterator(IteratorType.COLUMN, cell.columnNumber);
@@ -34,16 +35,16 @@ public class DR2 extends DeductionRule {
             while (ligne.hasNext()) {
                 Cell cellLigne = ligne.next();
                 if (cellLigne.equals(cell)) {
-                    continue; //On Saute cette valeur car elle ne nous intéresse pas
+                    continue; //On Saute la cellule sur laquelle on se base
                 }
                 ;
 
                 if (cellLigne.possibleValue.contains(cell.possibleValue.get(i))) {
-                    if (!cellLigne.isInSameBloc(cell)) {  // On ne peut appliquer la règle ni pour l'intersection avec le bloc ni pour celle avec la colonne
+                    if (!cellLigne.isInSameBloc(cell)) { // on saura si on doit enlever la valeur de la ligne ET du bloc
                         valueFoundOutOfBlock = true;
                         break;// Je veux arreter la boucle While
                     }
-                    valueFoundInBlock = true;
+                    valueFoundInBlock = true;   // on saura si on doit enlever la valeur de la ligne
                 }
             }
 
@@ -54,14 +55,13 @@ public class DR2 extends DeductionRule {
                 }
             }
         }
-        // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées (intersection entre Block et Ligne (ou Colonne))
+
+        // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées
         removeTravesingRow(block, cell, possibleValueARetirerDuBloc);
         removeTravesingRow(colonne, cell, possibleValueARetirerDeLaColonne);
-
-
     }
 
-
+    // Applique la Rule Locked Candidate en vérifiant la présence des possibilités de cell dans sa colonne
     public void parcourtColonneDR2(Cell cell, SudokuBoard board) {
         CollectionIterator ligne = board.createIterator(IteratorType.ROW, cell.rowNumber);
         CollectionIterator colonne = board.createIterator(IteratorType.COLUMN, cell.columnNumber);
@@ -81,14 +81,14 @@ public class DR2 extends DeductionRule {
             while (colonne.hasNext()) {
                 Cell cellColonne = colonne.next();
                 if (cellColonne.equals(cell)) {
-                    continue; //On Saute cette valeur car elle ne nous intéresse pas
+                    continue; //On Saute la cellule sur laquelle on se base
                 }
                 ;
 
                 if (cellColonne.possibleValue.contains(cell.possibleValue.get(i))) {
-                    if (!cellColonne.isInSameBloc(cell)) {  // On ne peut appliquer la règle ni pour l'intersection avec le bloc ni pour celle avec la colonne
+                    if (!cellColonne.isInSameBloc(cell)) {
                         valueFoundOutOfBlock = true;
-                        break;// Je veux arreter la boucle While
+                        break;
                     }
                     valueFoundInBlock = true;
                 }
@@ -101,12 +101,14 @@ public class DR2 extends DeductionRule {
                 }
             }
         }
-        //Parcourt de Ligne - Intersection avec Bloc
+
+        // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées
         removeTravesingColumn(block, cell, possibleValueARetirerDuBloc);
         removeTravesingColumn(ligne, cell, possibleValueARetirerDeLaLigne);
 
     }
 
+    // Applique la Rule Locked Candidate en vérifiant la présence des possibilités de cell dans son bloc
     public void parcourtBlocDR2(Cell cell, SudokuBoard board) {
         CollectionIterator ligne = board.createIterator(IteratorType.ROW, cell.rowNumber);
         CollectionIterator colonne = board.createIterator(IteratorType.COLUMN, cell.columnNumber);
@@ -129,7 +131,7 @@ public class DR2 extends DeductionRule {
             while (block.hasNext()) {
                 Cell cellBlock = block.next();
                 if (cellBlock.equals(cell)) {
-                    continue; //On Saute cette valeur car elle ne nous intéresse pas
+                    continue; //On Saute la cellule sur laquelle on se base
                 }
                 ;
 
@@ -158,13 +160,14 @@ public class DR2 extends DeductionRule {
             }
 
         }
-        //Parcourt de Ligne - Intersection avec Bloc
-        // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées (intersection entre Block et Ligne (ou Colonne))
+        // Retire toutes les valeurs récoltées des possibleValues de Cellules concernées
         removeTravesingBlock(ligne, cell, possibleValueARetirerDeLaLigne);
         removeTravesingBlock(colonne, cell, possibleValueARetirerDeLaColonne);
 
     }
 
+    //Retire des possibilits des cellules de la collection area: les valeurs de la liste
+    //Sauf pour les cellules qui intersectent le bloc
     public void removeTravesingBlock(CollectionIterator area, Cell cell, List<Integer> liste) {
         while (area.hasNext()) {
             Cell cellArea = area.next();
@@ -176,6 +179,8 @@ public class DR2 extends DeductionRule {
         }
     }
 
+    //Retire des possibilits des cellules de la collection area: les valeurs de la liste
+    //Sauf pour les cellules qui intersectent la ligne
     public void removeTravesingRow(CollectionIterator area, Cell cell, List<Integer> liste) {
         while (area.hasNext()) {
             Cell cellArea = area.next();
@@ -188,6 +193,8 @@ public class DR2 extends DeductionRule {
         }
     }
 
+    //Retire des possibilits des cellules de la collection area: les valeurs de la liste
+    //Sauf pour les cellules qui intersectent la colonne
     public void removeTravesingColumn(CollectionIterator area, Cell cell, List<Integer> liste) {
         while (area.hasNext()) {
             Cell cellArea = area.next();
@@ -200,7 +207,7 @@ public class DR2 extends DeductionRule {
         }
     }
 
-
+    //Retire les éléments de liste des possibilités de la cellule
     public void removeListFromCell(List<Integer> liste, Cell cell) {
         for (int i = 0; i < liste.size(); i++) {
             cell.removeFromPossibleValue(liste.get(i));

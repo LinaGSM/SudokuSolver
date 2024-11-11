@@ -48,7 +48,7 @@ public class Cell {
         return cell.blockNumber == this.blockNumber;
     }
 
-    //Assigne la valeur possible restant s'il ne reste qu'une possibilité
+    //Assigne la valeur possible restante s'il ne reste qu'une possibilité
     public void verifyNoMorePossibilities() {
         if (possibleValue.size() == 1) {
             realValue = possibleValue.get(0);
