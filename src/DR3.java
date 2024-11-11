@@ -67,7 +67,7 @@ public class DR3 extends DeductionRule {
 
 
     //identification de toute les cellules ayant exactement 2 possibilités
-    ArrayList<Cell> findCellsWithTwoCandidates(SudokuBoard board) {
+     private ArrayList<Cell> findCellsWithTwoCandidates(SudokuBoard board) {
         ArrayList<Cell> listOfCellWithTwoCandidates = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             CollectionIterator rowIterator = board.createIterator(IteratorType.ROW, i);
@@ -83,7 +83,7 @@ public class DR3 extends DeductionRule {
 
 
     // Cherche la deuxieme celllule de la configuration XY-Wing
-    HashSet<Cell> findSecondCell(Cell cellA, SudokuBoard board) {
+    private HashSet<Cell> findSecondCell(Cell cellA, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>(getCellsAccessibleByACell(cellA, board)); // recupere la liste des cellules sur la meme ligne, colone ou block que cellA
         HashSet<Cell> listOfCellsWithTwoCandidates = listOfCells.stream()
                 .filter(x -> x.possibleValue.size() == 2)         // filtre la liste pour obtenir les cellules avec exactement 2 candidats
@@ -96,7 +96,7 @@ public class DR3 extends DeductionRule {
 
 
     // Cherche la troixieme cellule de la configuration XY-Wing
-    HashSet<Cell> findThirdCell(Cell cellA, Cell cellB, SudokuBoard board, int uncommonCandidate1, int uncommonCandidate2) {
+    private HashSet<Cell> findThirdCell(Cell cellA, Cell cellB, SudokuBoard board, int uncommonCandidate1, int uncommonCandidate2) {
         HashSet<Cell> listOfThirdCells = findSecondCell(cellA, board);
         if (listOfThirdCells.contains(cellB)) {
             listOfThirdCells.remove(cellB); // Retire la cellule B
@@ -118,21 +118,21 @@ public class DR3 extends DeductionRule {
 
 
     // determine si il existe exactement un candidat en commun entre 2 cellules
-    boolean hasOneCommonCandidate(Cell cellA, Cell cellB) {
+    private boolean hasOneCommonCandidate(Cell cellA, Cell cellB) {
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cellA.possibleValue);
         listOfCommonCandidates.retainAll(cellB.possibleValue);
         return (listOfCommonCandidates.size() == 1);
     }
 
     // recupere le candidat en commun entre 2 cellules
-    int getTheCommonCandidate(Cell cell1, Cell cell2) {
+    private int getTheCommonCandidate(Cell cell1, Cell cell2) {
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cell1.possibleValue);
         listOfCommonCandidates.retainAll(cell2.possibleValue);
         return listOfCommonCandidates.get(0);
     }
 
     // verifie si 3 cellules respectent la configuration XY-Wing
-    boolean isXYWingConfiguration(Cell pivot, Cell pincer1, Cell pincer2) {
+    private boolean isXYWingConfiguration(Cell pivot, Cell pincer1, Cell pincer2) {
         // Vérifie que le pivot a exactement deux candidats
         if (pivot.possibleValue.size() != 2) {
             return false;
@@ -170,7 +170,7 @@ public class DR3 extends DeductionRule {
 
 
     // recupere la liste des cellules qui sont dans l'intersection des pincettes
-    ArrayList<Cell> getIntersectingCells(Cell pincer1, Cell pincer2, SudokuBoard board) {
+    private ArrayList<Cell> getIntersectingCells(Cell pincer1, Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCellVisibleByPincer1 = new HashSet<>(getCellsAccessibleByACell(pincer1, board));
         HashSet<Cell> listOfCellVisibleByPincer2 = new HashSet<>(getCellsAccessibleByACell(pincer2, board));
         ArrayList<Cell> listOfIntersectingCell = new ArrayList<>(listOfCellVisibleByPincer1);
@@ -180,7 +180,7 @@ public class DR3 extends DeductionRule {
     }
 
     // recupere la liste des cellules se trouvant sur la meme ligne, colonne ou bloque que la cellule spécidfiée
-    public static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
+    private static HashSet<Cell> getCellsAccessibleByACell(Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCells = new HashSet<>();
         CollectionIterator blockIterator;
         CollectionIterator columnIterator;
@@ -209,7 +209,7 @@ public class DR3 extends DeductionRule {
     }
 
     // retire le Candidat z des intersections des pincers
-    boolean removeCandidateFromIntersectingPincers(Cell pincer1, Cell pincer2, int value, SudokuBoard board) {
+    private boolean removeCandidateFromIntersectingPincers(Cell pincer1, Cell pincer2, int value, SudokuBoard board) {
         boolean modifiedBoard = false;
         ArrayList<Cell> listOfIntersectingCells = new ArrayList<>(getIntersectingCells(pincer1, pincer2, board));
         for (Cell cell : listOfIntersectingCells) {
@@ -222,7 +222,7 @@ public class DR3 extends DeductionRule {
     }
 
     // fonction pour verifier si il existe des single value dans les tests
-    void verifyBoard(SudokuBoard board) {
+    private void verifyBoard(SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 Cell cell = SudokuBoard.board[i][j];
