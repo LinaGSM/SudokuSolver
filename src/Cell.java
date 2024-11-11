@@ -12,7 +12,7 @@ public class Cell {
         this.realValue = realValue;
         this.rowNumber = rowNumber;
         this.columnNumber = columnNumber;
-        this.blockNumber = block(rowNumber, columnNumber);
+        this.blockNumber = calculateBlockNumber(rowNumber, columnNumber);
 
         if (realValue != 0) {
             possibleValue = List.of(realValue);
@@ -20,7 +20,7 @@ public class Cell {
 
     }
 
-    private int block(int i, int j) {   // Calcul du block à la ligne i colonne j
+    private int calculateBlockNumber(int i, int j) {   // Calcul du block à la ligne i colonne j
         return ((i / 3) * 3 + j / 3); // Somme des divisions entières par 3 des lignes et colonnes
     }
 
