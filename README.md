@@ -18,7 +18,7 @@ L'algorithme de déduction utilisé fonctionne comme suit :
   - Si la grille n'est pas encore complètement remplie, la deuxième règle (**DR2**) est appliquée.
   - Si la grille reste incomplète, la troisième règle (**DR3**) est appliquée.
   - Si la grille n'est toujours pas remplie, l'utilisateur est invité à entrer une valeur dans une cellule vide pour débloquer la situation.
-  - Le processus est répété jusqu'à ce que la grille soit entièrement résolue. Si une incohérence est détectée lors de la résolution, un message demandant de redémarrer le solveur est affiché.
+  - Le processus est répété jusqu'à ce que la grille soit entièrement résolue.
 
 ## Fonctionnalités
 - Résolution automatique d'une grille de Sudoku à l'aide de règles de déduction.
