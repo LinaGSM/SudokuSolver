@@ -64,7 +64,8 @@ Chaque fichier Java a une fonction spécifique dans le projet :
 - **DR1.java**, **DR2.java**, **DR3.java** : Les trois implémentations des règles de déduction, chacune représentant une technique différente pour résoudre le Sudoku.
 - **RuleManager.java** : Coordonne l'application des règles de déduction et gère les interactions avec l'utilisateur si le Sudoku n'est pas résolu automatiquement.
 - **UserInputHandler.java** : Gère les saisies de l'utilisateur lorsqu'il est nécessaire de débloquer la résolution en entrant manuellement une valeur.
-- **BlockIterator.java**, **RowIterator.java**, **ColumnIterator.java** : Itérateurs utilisés pour parcourir respectivement les blocs, les lignes et les colonnes de la grille de Sudoku.
+- **BlockIterator.java**, **RowIterator.java**, **ColumnIterator.java**, **BoardIterator.java** : Itérateurs utilisés pour parcourir respectivement les blocs, les lignes, les colonnes et la grille de Sudoku.
+
 
 ## Installation
 
