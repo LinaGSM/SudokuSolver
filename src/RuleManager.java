@@ -71,7 +71,7 @@ public class RuleManager {
     }
 
     // verifie si le sudoku est remplie
-    boolean isFilled(SudokuBoard board) {
+    private boolean isFilled(SudokuBoard board) {
         boolean isFilled = true;
         board.iterator.remettreLesCompteursAZero();
         while (board.iterator.hasNext()) {
@@ -84,7 +84,7 @@ public class RuleManager {
     }
 
     // notifie l'utilsateur de debloqué la resolution du sudoku
-    public void notifyUser(SudokuBoard board) {
+    private void notifyUser(SudokuBoard board) {
         userInputHandler.notifyUserToEnterValue(board);
     }
 }
