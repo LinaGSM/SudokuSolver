@@ -13,7 +13,7 @@ public class UserInputHandler {
         return instance;
     }
 
-    void notifyUserToEnterValue(SudokuBoard board) {
+    public void notifyUserToEnterValue(SudokuBoard board) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         int col;
         int l;
