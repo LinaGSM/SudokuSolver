@@ -27,8 +27,6 @@ public class ColumnIterator implements CollectionIterator{
     @Override
     public Cell next() {
         if (hasNext()) {
-//            int i = prochainIndice;
-//            prochainIndice++;
             return grille[prochainIndice++][colNb];
         }
         return grille[prochainIndice][colNb]; //trouver quoi renvoyer au cas où pas de next
