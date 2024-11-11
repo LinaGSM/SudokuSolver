@@ -1,9 +1,7 @@
 public class BoardItrator implements CollectionIterator{
     private Cell[][] grille;
-    //private int colNb;  // le numéro de la ligne
     private int prochainIndice = 0; // On commence à la première case de la ligne
     private int row = 0;    // On commence à la première ligne
-    //public boolean finDeLigne = false;
 
     public BoardItrator(Cell[][] grille) {
         this.grille = grille;
@@ -21,7 +19,6 @@ public class BoardItrator implements CollectionIterator{
 
     @Override
     public int affihceIndex() {
-        //System.out.println(this.getIndex());
         return prochainIndice;
     }
 
@@ -34,7 +31,6 @@ public class BoardItrator implements CollectionIterator{
     public Cell next() {
         if (hasNext()) {
             if( prochainIndice == grille.length - 1 ) {
-                //finDeLigne = true;
                 int j = prochainIndice;
                 row++;
                 prochainIndice = 0;
