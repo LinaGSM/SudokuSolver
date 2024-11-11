@@ -71,13 +71,15 @@ Chaque fichier Java a une fonction spécifique dans le projet :
 ## Installation
 
 ### Prerequis
-- Java Development Kit (JDK) version 11 or higher
+- **Java** (JDK 8 ou supérieur) doit être installé sur votre système.
 - Git
+- Un terminal ou un IDE comme IntelliJ IDEA pour exécuter le programme.
+- Un fichier d'entrée contenant une grille de Sudoku dans le format spécifié (voir section "Format du fichier d'entrée").
 
-### Clone the Repository
-To clone the project from GitHub, use the following command:
+### Cloner le dépôt
+Pour cloner le projet depuis GitHub, utilisez la commande suivante :
 ```bash
-git clone [repository-url]
+git clone "https://github.com/LinaGSM/SudokuSolver"
 ```
 
 ## Format du fichier d'entrée
@@ -87,6 +89,7 @@ Le fichier d'entrée est un fichier texte nommé "test" situé dans le répertoi
 - 0 représente une cellule vide.
 
 **Exemple e contenu pour le fichier test** :
+```
 3,8,0,1,0,0,5,9,0
 0,0,5,0,9,0,0,0,1
 1,0,9,0,0,5,6,0,3
@@ -96,6 +99,7 @@ Le fichier d'entrée est un fichier texte nommé "test" situé dans le répertoi
 2,0,1,8,0,0,3,0,9
 9,0,0,0,3,0,1,0,0
 0,3,8,0,0,1,0,5,7
+```
 
 ## Instructions d'utilisation
 ### Compilation
@@ -116,7 +120,7 @@ Pour compiler le projet, suivez ces étapes dans un terminal :
    ```bash
    java Main "chemin_absolu/vers/le/fichier/test"
    ```
-**Exemple** : java Main C:/Users/magiq/Documents/SudokuSolver/src/test
+**Exemple de chemin** : java Main C:/Users/magiq/Documents/SudokuSolver/src/test
 
 ## Autrices
   - Lina GASMI
