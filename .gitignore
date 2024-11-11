@@ -1,1 +1,6 @@
 .class
+# Ignorer le dossier .idea
+.idea/
+
+# Ignorer le fichier FinalSudokuSolver.iml
+FinalSudokuSolver.iml
