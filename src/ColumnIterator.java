@@ -1,4 +1,4 @@
-public class ColumnIterator implements CollectionIterator{
+public class ColumnIterator implements CollectionIterator {
     private Cell[][] grille;
     private int colNb;  // le numéro de la ligne
     private int prochainIndice = 0;
@@ -9,7 +9,7 @@ public class ColumnIterator implements CollectionIterator{
     }
 
     @Override
-    public int getIndex(){
+    public int getIndex() {
         return prochainIndice;
     }
 
@@ -26,7 +26,7 @@ public class ColumnIterator implements CollectionIterator{
         return grille[prochainIndice][colNb]; //trouver quoi renvoyer au cas où pas de next
     }
 
-    public void remettreLesCompteursAZero(){
-        prochainIndice=0;
+    public void remettreLesCompteursAZero() {
+        prochainIndice = 0;
     }
 }

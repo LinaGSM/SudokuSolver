@@ -4,7 +4,7 @@ public class RuleManager {
     private DeductiveRuleHandler firstRule;
 
     //constructeur
-    private RuleManager(){
+    private RuleManager() {
         userInputHandler = UserInputHandler.getInstance();
         firstRule = new DR1();
         // definit DR2 comme la suite de DR1
@@ -15,7 +15,7 @@ public class RuleManager {
 
     //getters et setters
     public static RuleManager getRuleManagerInstance() {
-        if (ruleManagerInstance == null){
+        if (ruleManagerInstance == null) {
             ruleManagerInstance = new RuleManager();
         }
         return ruleManagerInstance;
@@ -24,12 +24,12 @@ public class RuleManager {
     // methods
 
     // applique les differentes regles pour resoudre le sudoku
-    public void applyRules(SudokuBoard board){
+    public void applyRules(SudokuBoard board) {
         boolean dr3WasApplied = false;
-        while (!isFilled(board)){
+        while (!isFilled(board)) {
             DeductiveRuleHandler currentRule = firstRule;
 
-            while(currentRule != null){
+            while (currentRule != null) {
 
                 if (currentRule instanceof DR1) {
                     System.out.println("Application de DR1 ...");
@@ -53,7 +53,7 @@ public class RuleManager {
                 currentRule = currentRule.getNext();
 
                 // si le tableau est rempli plus besoin d'appliquer de regle
-                if(isFilled(board)){
+                if (isFilled(board)) {
                     break;
                 }
             }
@@ -65,18 +65,18 @@ public class RuleManager {
         }
 
         // Oblige le niveau de difficulté à rester à HARD si on réapplique la chaine de DR plus d'une fois
-        if (dr3WasApplied){
+        if (dr3WasApplied) {
             board.setDifficulty(Difficulty.HARD);
         }
     }
 
     // verifie si le sudoku est remplie
-    boolean isFilled(SudokuBoard board){
+    boolean isFilled(SudokuBoard board) {
         boolean isFilled = true;
         board.iterator.remettreLesCompteursAZero();
-        while (board.iterator.hasNext()){
+        while (board.iterator.hasNext()) {
             Cell cell = board.iterator.next();
-            if (cell.realValue == 0){
+            if (cell.realValue == 0) {
                 isFilled = false;
             }
         }
@@ -84,7 +84,7 @@ public class RuleManager {
     }
 
     // notifie l'utilsateur de debloqué la resolution du sudoku
-    public void notifyUser(SudokuBoard board){
+    public void notifyUser(SudokuBoard board) {
         userInputHandler.notifyUserToEnterValue(board);
     }
 }

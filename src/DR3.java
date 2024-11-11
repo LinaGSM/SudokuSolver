@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DR3 extends DeductionRule{
+public class DR3 extends DeductionRule {
     public SudokuBoard processRule(SudokuBoard board) {
         boolean hasChanged = true;
 
@@ -89,7 +89,7 @@ public class DR3 extends DeductionRule{
                 .filter(x -> x.possibleValue.size() == 2)         // filtre la liste pour obtenir les cellules avec exactement 2 candidats
                 .collect(Collectors.toCollection(HashSet::new));  // collecte le resultat dans un set/ ensemble
         HashSet<Cell> listOfPotentialCells = listOfCellsWithTwoCandidates.stream()
-                .filter(x-> hasOneCommonCandidate(cellA, x))     //  filtre la liste pour obtenir les cellules avec exactement 2 candidats et exactement 1 candidats en commun avec la celluleA
+                .filter(x -> hasOneCommonCandidate(cellA, x))     //  filtre la liste pour obtenir les cellules avec exactement 2 candidats et exactement 1 candidats en commun avec la celluleA
                 .collect(Collectors.toCollection(HashSet::new));
         return listOfPotentialCells;
     }
@@ -118,13 +118,14 @@ public class DR3 extends DeductionRule{
 
 
     // determine si il existe exactement un candidat en commun entre 2 cellules
-    boolean hasOneCommonCandidate(Cell cellA, Cell cellB){
+    boolean hasOneCommonCandidate(Cell cellA, Cell cellB) {
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cellA.possibleValue);
         listOfCommonCandidates.retainAll(cellB.possibleValue);
         return (listOfCommonCandidates.size() == 1);
     }
+
     // recupere le candidat en commun entre 2 cellules
-    int getTheCommonCandidate(Cell cell1, Cell cell2){
+    int getTheCommonCandidate(Cell cell1, Cell cell2) {
         ArrayList<Integer> listOfCommonCandidates = new ArrayList<>(cell1.possibleValue);
         listOfCommonCandidates.retainAll(cell2.possibleValue);
         return listOfCommonCandidates.get(0);
@@ -169,7 +170,7 @@ public class DR3 extends DeductionRule{
 
 
     // recupere la liste des cellules qui sont dans l'intersection des pincettes
-    ArrayList<Cell> getIntersectingCells(Cell pincer1, Cell pincer2 , SudokuBoard board){
+    ArrayList<Cell> getIntersectingCells(Cell pincer1, Cell pincer2, SudokuBoard board) {
         HashSet<Cell> listOfCellVisibleByPincer1 = new HashSet<>(getCellsAccessibleByACell(pincer1, board));
         HashSet<Cell> listOfCellVisibleByPincer2 = new HashSet<>(getCellsAccessibleByACell(pincer2, board));
         ArrayList<Cell> listOfIntersectingCell = new ArrayList<>(listOfCellVisibleByPincer1);
@@ -188,18 +189,18 @@ public class DR3 extends DeductionRule{
         columnIterator = board.createIterator(IteratorType.COLUMN, pincer2.columnNumber);
         blockIterator = board.createIterator(IteratorType.BLOCK, pincer2.blockNumber);
 
-        while (rowIterator.hasNext()){
+        while (rowIterator.hasNext()) {
             Cell currentCell = rowIterator.next();
             listOfCells.add(currentCell);
         }
 
-        while (columnIterator.hasNext()){
+        while (columnIterator.hasNext()) {
             Cell currentCell = columnIterator.next();
             listOfCells.add(currentCell);
 
         }
 
-        while (blockIterator.hasNext()){
+        while (blockIterator.hasNext()) {
             Cell currentCell = blockIterator.next();
             listOfCells.add(currentCell);
         }
@@ -208,7 +209,7 @@ public class DR3 extends DeductionRule{
     }
 
     // retire le Candidat z des intersections des pincers
-    boolean removeCandidateFromIntersectingPincers(Cell pincer1, Cell pincer2, int value, SudokuBoard board){
+    boolean removeCandidateFromIntersectingPincers(Cell pincer1, Cell pincer2, int value, SudokuBoard board) {
         boolean modifiedBoard = false;
         ArrayList<Cell> listOfIntersectingCells = new ArrayList<>(getIntersectingCells(pincer1, pincer2, board));
         for (Cell cell : listOfIntersectingCells) {
@@ -221,16 +222,16 @@ public class DR3 extends DeductionRule{
     }
 
     // fonction pour verifier si il existe des single value dans les tests
-    void verifyBoard(SudokuBoard board){
-        for (int i = 0; i < 9; i++){
-            for (int j = 0; j < 9; j++){
+    void verifyBoard(SudokuBoard board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 Cell cell = SudokuBoard.board[i][j];
-                if (cell.possibleValue.size() == 1 ) {
+                if (cell.possibleValue.size() == 1) {
                     cell.realValue = cell.possibleValue.get(0);
                     ArrayList<Cell> list = new ArrayList<>(getCellsAccessibleByACell(cell, board));
-                    for (Cell elt : list){
+                    for (Cell elt : list) {
 
-                        if (!(elt.equals(cell)) && elt.possibleValue.size() > 1 && elt.possibleValue.contains(cell.realValue)){
+                        if (!(elt.equals(cell)) && elt.possibleValue.size() > 1 && elt.possibleValue.contains(cell.realValue)) {
                             elt.possibleValue.remove(Integer.valueOf(cell.realValue));
                             for (int k = 0; k < 9; k++) {
                                 for (int l = 0; l < 9; l++) {

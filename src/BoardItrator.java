@@ -1,4 +1,4 @@
-public class BoardItrator implements CollectionIterator{
+public class BoardItrator implements CollectionIterator {
     private Cell[][] grille;
     private int prochainIndice = 0; // On commence à la première case de la ligne
     private int row = 0;    // On commence à la première ligne
@@ -7,13 +7,13 @@ public class BoardItrator implements CollectionIterator{
         this.grille = grille;
     }
 
-    public void remettreLesCompteursAZero(){
-        prochainIndice=0;
-        row=0;
+    public void remettreLesCompteursAZero() {
+        prochainIndice = 0;
+        row = 0;
     }
 
     @Override
-    public int getIndex(){
+    public int getIndex() {
         return prochainIndice;
     }
 
@@ -26,14 +26,14 @@ public class BoardItrator implements CollectionIterator{
     @Override
     public Cell next() {
         if (hasNext()) {
-            if( prochainIndice == grille.length - 1 ) {
+            if (prochainIndice == grille.length - 1) {
                 int j = prochainIndice;
                 row++;
                 prochainIndice = 0;
-                return grille[row-1][j];
+                return grille[row - 1][j];
             }
             return grille[row][prochainIndice++];
         }
-        return grille[row-1][prochainIndice]; //trouver quoi renvoyer au cas où pas de next
+        return grille[row - 1][prochainIndice]; //trouver quoi renvoyer au cas où pas de next
     }
 }

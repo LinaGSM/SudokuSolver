@@ -1,4 +1,4 @@
-public class RowIterator implements CollectionIterator{
+public class RowIterator implements CollectionIterator {
     private Cell[][] grille;
     private int rowNb;  // le numéro de la ligne
     public int prochainIndice = 0;
@@ -9,7 +9,7 @@ public class RowIterator implements CollectionIterator{
     }
 
     @Override
-    public int getIndex(){
+    public int getIndex() {
         return prochainIndice;
     }
 
@@ -21,13 +21,13 @@ public class RowIterator implements CollectionIterator{
 
     @Override
     public Cell next() {
-        if(hasNext()){
+        if (hasNext()) {
             return grille[rowNb][prochainIndice++];
         }
         return grille[rowNb][prochainIndice]; //trouver quoi retourner comme Cell
     }
 
-    public void remettreLesCompteursAZero(){
-        prochainIndice=0;
+    public void remettreLesCompteursAZero() {
+        prochainIndice = 0;
     }
 }

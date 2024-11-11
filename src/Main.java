@@ -1,7 +1,7 @@
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // Creation du sudoku a partir d'un fichier
-        String path =args[0];
+        String path = args[0];
         SudokuBoard board = new SudokuBoard(path);
 
         // creation de l'instance unique de RuleManager
