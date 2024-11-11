@@ -8,31 +8,31 @@ public class SudokuBoard {
     public static BoardItrator iterator = new BoardItrator(board);
     private Difficulty difficulty;
 
+    //Crée le Tableau de Cellules à partir d'un fichier
     public SudokuBoard(String chemin) {
         int i = 0; // compteur de lignes
         try {
 
-            File myFile = new File(chemin); //on stock le fichier dans myFile
-            Scanner myReader = new Scanner(myFile); // On lance la lecture
-            while (myReader.hasNextLine()) { // on avance jusqu'à ce qu'il n'y ait pls de ligne
-                String[] data = myReader.nextLine().split(","); // On stock temporairement chaque chiffre
-                // de la ligne parcourue dans un tableau de
-                // chaîne de caractères data
+            // On récupère le fichier
+            File myFile = new File(chemin);
+            Scanner myReader = new Scanner(myFile);
 
-                for (int j = 0; j < data.length; j++) {     // On va remplir le board
-                    board[i][j] = new Cell(Integer.parseInt(data[j]), i, j);   // On créé chaque Cell du tableau avec son constructeur
-                    // dont le paramètre est: le chiffre de la ligne parcourue
-                    // transformé en int.
-                    // On affecte cette Cell directement dans la bonne case du tableau
+            // On remplit le tableau lignes par lignes
+            while (myReader.hasNextLine()) {
+                String[] data = myReader.nextLine().split(",");
+
+                // On remplit le tableau en créant chaque cellules dans sa case du tableau
+                for (int j = 0; j < data.length; j++) {
+                    board[i][j] = new Cell(Integer.parseInt(data[j]), i, j);
+
                 }
-// Les 2 lignes en dessous sont pour vérifier qu'on a bien des Cell
-                i++;    // On va lire la ligne d'en dessous, compteur de ligne augmente
+
+                // On passe à la ligne suivante
+                i++;
             }
 
-// Les lignes suivantes sont pour vérifier l'entiereté du tableau
-
         } catch (IOException e) {
-            e.printStackTrace();    // A FAIRE: Il reste à comprendre cette ligne
+            e.printStackTrace();
         }
     }
 
@@ -45,6 +45,7 @@ public class SudokuBoard {
         this.difficulty = d;
     }
 
+    //Créé la ligne, colonne ou le bloc à parcourrir
     public CollectionIterator createIterator(IteratorType type, int index) {
         switch (type) {
             case ROW:
@@ -58,6 +59,7 @@ public class SudokuBoard {
         }
     }
 
+    //Affiche le tableau actuel
     public void show() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
