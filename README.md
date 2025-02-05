@@ -113,7 +113,7 @@ Pour compiler le projet, suivez ces étapes dans un terminal :
    ```
 3. Compiler le programme
    ```bash
-   javac Main.java
+   javac *.java
    ```
 4. Exécuter le programme
    ```bash
