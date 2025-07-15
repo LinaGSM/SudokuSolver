@@ -122,5 +122,5 @@ Pour compiler le projet, suivez ces étapes dans un terminal :
 **Exemple de chemin** : java Main C:/Users/magiq/Documents/SudokuSolver/src/test
 
 ## Autrices
-  - Lina GASMI
-  - Ramlat MAOULANA CHARIF
+  - [Lina GASMI](https://github.com/LinaGSM)
+  - [Ramlat MAOULANA CHARIF](https://github.com/capatainkomic)
